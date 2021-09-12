@@ -5,8 +5,8 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.apollographql.apollo.coroutines.await
-import com.example.rocketreserver.LaunchListQuery
 import jp.sadashi.sample.apollo.client.infra.graphql.ApiClient
+import jp.sadashi.sample.apollo.client.infra.graphql.LaunchListQuery
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
