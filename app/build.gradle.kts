@@ -3,6 +3,7 @@ plugins {
     id(Deps.Plugin.kotlin)
     id(Deps.Plugin.versions)
     id(Deps.Plugin.apollo).version(Deps.Versions.apollo)
+    id(Deps.Plugin.androidJunit5)
 }
 
 android {
@@ -29,10 +30,10 @@ android {
             )
         }
     }
-    sourceSets {
-        getByName("main").java.srcDirs("src/main/kotlin")
-        getByName("test").java.srcDirs("src/test/kotlin")
+    sourceSets.forEach {
+        it.java.srcDirs("src/$it.name/kotlin")
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -40,9 +41,32 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    testOptions {
+        junitPlatform {
+            filters {
+                includeEngines("spek2")
+            }
+            jacocoOptions {
+                html.enabled = true
+                xml.enabled = true
+                csv.enabled = false
+                excludedClasses.addAll(
+                    listOf(
+                        "**/di/*.class",
+                        "**/extensions/*.class",
+                        "**/ui/**/*.class",
+                        "**/utility/*.class"
+                    )
+                )
+            }
+        }
+    }
 }
 
 dependencies {
+    implementation(Deps.Lib.Kotlin.stdLibJdk8)
+    
     implementation(Deps.Lib.AndroidX.core)
     implementation(Deps.Lib.AndroidX.appCompat)
     implementation(Deps.Lib.AndroidX.constraintLayout)
@@ -53,4 +77,10 @@ dependencies {
     implementation(Deps.Lib.Apollo.coroutines)
     implementation(Deps.Lib.Apollo.android)
     implementation(Deps.Lib.Apollo.api)
+
+    testImplementation(Deps.Lib.Kotlin.reflect)
+    testImplementation(Deps.Lib.Spek.dsl)
+    testImplementation(Deps.Lib.Spek.runner)
+
+    testImplementation(Deps.Lib.mockk)
 }

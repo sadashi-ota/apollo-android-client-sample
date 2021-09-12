@@ -9,6 +9,7 @@ buildscript {
         classpath(Deps.Gradle.build)
         classpath(Deps.Gradle.kotlin)
         classpath(Deps.Gradle.versionsPlugin)
+        classpath(Deps.Gradle.androidJunit5)
     }
 }
 

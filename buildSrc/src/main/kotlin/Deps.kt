@@ -6,12 +6,14 @@ object Deps {
         const val buildTools = "30.0.2"
         const val kotlin = "1.5.30"
         const val apollo = "2.5.9"
+        const val spek = "2.0.17"
     }
 
     object Gradle {
         const val build = "com.android.tools.build:gradle:7.0.2"
         const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
         const val versionsPlugin = "com.github.ben-manes:gradle-versions-plugin:0.39.0"
+        const val androidJunit5 = "de.mannodermaus.gradle.plugins:android-junit5:1.7.1.1"
     }
 
     object Plugin {
@@ -19,9 +21,15 @@ object Deps {
         const val kotlin = "kotlin-android"
         const val versions = "com.github.ben-manes.versions"
         const val apollo = "com.apollographql.apollo"
+        const val androidJunit5 = "de.mannodermaus.android-junit5"
     }
 
     object Lib {
+        object Kotlin {
+            const val stdLibJdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
+            const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
+        }
+
         object AndroidX {
             const val core = "androidx.core:core-ktx:1.6.0"
             const val appCompat = "androidx.appcompat:appcompat:1.3.1"
@@ -37,5 +45,12 @@ object Deps {
             const val android = "com.apollographql.apollo:apollo-android-support:${Versions.apollo}"
             const val api = "com.apollographql.apollo:apollo-api:${Versions.apollo}"
         }
+
+        object Spek {
+            const val dsl = "org.spekframework.spek2:spek-dsl-jvm:${Versions.spek}"
+            const val runner = "org.spekframework.spek2:spek-runner-junit5:${Versions.spek}"
+        }
+
+        const val mockk = "io.mockk:mockk:1.12.0"
     }
 }
