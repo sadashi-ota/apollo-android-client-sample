@@ -1,18 +1,16 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply(plugin = "com.github.ben-manes.versions")
+
 buildscript {
     repositories {
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:7.0.2")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30")
-    }
-}
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
+        classpath(Deps.Gradle.build)
+        classpath(Deps.Gradle.kotlin)
+        classpath(Deps.Gradle.versionsPlugin)
     }
 }
 

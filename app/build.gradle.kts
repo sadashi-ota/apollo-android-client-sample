@@ -1,15 +1,17 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id("com.github.ben-manes.versions")
 }
 
 android {
-    compileSdk = 30
+    compileSdk = Deps.Versions.targetSdk
 
     defaultConfig {
         applicationId = "jp.sadashi.sample.apollo.client"
-        minSdk = 26
-        targetSdk = 30
+        minSdk = Deps.Versions.minSdk
+        targetSdk = Deps.Versions.targetSdk
+        buildToolsVersion = "30.0.2"
         versionCode = 1
         versionName = "0.0.1"
     }
@@ -40,8 +42,8 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.6.0")
-    implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
+    implementation(Deps.Lib.AndroidX.core)
+    implementation(Deps.Lib.AndroidX.appCompat)
+    implementation(Deps.Lib.AndroidX.constraintLayout)
+    implementation(Deps.Lib.material)
 }
