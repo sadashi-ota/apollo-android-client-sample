@@ -1,6 +1,4 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-apply(plugin = "com.github.ben-manes.versions")
-
 buildscript {
     repositories {
         google()
@@ -13,6 +11,8 @@ buildscript {
         classpath(Deps.Gradle.versionsPlugin)
     }
 }
+
+apply(plugin = Deps.Plugin.versions)
 
 tasks.register("clean", type = Delete::class) {
     delete(rootProject.buildDir)
