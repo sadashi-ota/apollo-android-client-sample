@@ -1,6 +1,7 @@
 plugins {
     id(Deps.Plugin.application)
     id(Deps.Plugin.kotlin)
+    id(Deps.Plugin.kapt)
     id(Deps.Plugin.versions)
     id(Deps.Plugin.apollo).version(Deps.Versions.apollo)
     id(Deps.Plugin.androidJunit5)
@@ -64,13 +65,26 @@ android {
     }
 }
 
+apollo {
+    generateKotlinModels.set(true)
+}
+
 dependencies {
     implementation(Deps.Lib.Kotlin.stdLibJdk8)
-    
+    implementation(Deps.Lib.Kotlin.Coroutines.core)
+    implementation(Deps.Lib.Kotlin.Coroutines.android)
+
     implementation(Deps.Lib.AndroidX.core)
     implementation(Deps.Lib.AndroidX.appCompat)
     implementation(Deps.Lib.AndroidX.constraintLayout)
     implementation(Deps.Lib.material)
+
+    implementation(Deps.Lib.AndroidX.LifeCycle.viewModel)
+    implementation(Deps.Lib.AndroidX.LifeCycle.liveData)
+    implementation(Deps.Lib.AndroidX.LifeCycle.runtime)
+    implementation(Deps.Lib.AndroidX.LifeCycle.savedState)
+    implementation(Deps.Lib.AndroidX.LifeCycle.java8)
+    kapt(Deps.Lib.AndroidX.LifeCycle.compiler)
 
     implementation(Deps.Lib.Apollo.runtime)
     implementation(Deps.Lib.Apollo.cache)

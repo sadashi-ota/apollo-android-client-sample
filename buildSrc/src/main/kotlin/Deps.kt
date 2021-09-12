@@ -5,6 +5,8 @@ object Deps {
         const val targetSdk = 30
         const val buildTools = "30.0.2"
         const val kotlin = "1.5.30"
+        const val coroutines = "1.5.2"
+        const val lifecycle = "2.3.1"
         const val apollo = "2.5.9"
         const val spek = "2.0.17"
     }
@@ -19,6 +21,7 @@ object Deps {
     object Plugin {
         const val application = "com.android.application"
         const val kotlin = "kotlin-android"
+        const val kapt = "kotlin-kapt"
         const val versions = "com.github.ben-manes.versions"
         const val apollo = "com.apollographql.apollo"
         const val androidJunit5 = "de.mannodermaus.android-junit5"
@@ -28,12 +31,26 @@ object Deps {
         object Kotlin {
             const val stdLibJdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
             const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
+
+            object Coroutines {
+                const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+                const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+            }
         }
 
         object AndroidX {
             const val core = "androidx.core:core-ktx:1.6.0"
             const val appCompat = "androidx.appcompat:appcompat:1.3.1"
             const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.0"
+
+            object LifeCycle {
+                const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
+                const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
+                const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
+                const val savedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.lifecycle}"
+                const val compiler = "androidx.lifecycle:lifecycle-compiler:${Versions.lifecycle}"
+                const val java8 = "androidx.lifecycle:lifecycle-common-java8:${Versions.lifecycle}"
+            }
         }
 
         const val material = "com.google.android.material:material:1.4.0"
