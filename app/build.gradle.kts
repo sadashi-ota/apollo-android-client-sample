@@ -2,6 +2,7 @@ plugins {
     id(Deps.Plugin.application)
     id(Deps.Plugin.kotlin)
     id(Deps.Plugin.kapt)
+    id(Deps.Plugin.navigation)
     id(Deps.Plugin.versions)
     id(Deps.Plugin.apollo).version(Deps.Versions.apollo)
     id(Deps.Plugin.androidJunit5)
@@ -31,14 +32,20 @@ android {
             )
         }
     }
+
     sourceSets.forEach {
         it.java.srcDirs("src/$it.name/kotlin")
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -77,6 +84,7 @@ dependencies {
     implementation(Deps.Lib.AndroidX.core)
     implementation(Deps.Lib.AndroidX.appCompat)
     implementation(Deps.Lib.AndroidX.constraintLayout)
+    implementation(Deps.Lib.AndroidX.recyclerView)
     implementation(Deps.Lib.material)
 
     implementation(Deps.Lib.AndroidX.LifeCycle.viewModel)
@@ -85,6 +93,11 @@ dependencies {
     implementation(Deps.Lib.AndroidX.LifeCycle.savedState)
     implementation(Deps.Lib.AndroidX.LifeCycle.java8)
     kapt(Deps.Lib.AndroidX.LifeCycle.compiler)
+
+    implementation(Deps.Lib.AndroidX.Navigation.fragment)
+    implementation(Deps.Lib.AndroidX.Navigation.ui)
+
+    implementation(Deps.Lib.coil)
 
     implementation(Deps.Lib.Apollo.runtime)
     implementation(Deps.Lib.Apollo.cache)
