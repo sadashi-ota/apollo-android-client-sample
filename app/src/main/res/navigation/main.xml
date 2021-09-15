@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/launchListFragment"
-        android:name="jp.sadashi.sample.apollo.client.ui.view.LaunchListFragment"
+        android:name="jp.sadashi.sample.apollo.client.ui.list.LaunchListFragment"
         tools:layout="@layout/launch_list_fragment">
         <action
             android:id="@+id/openLaunchDetails"
@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/launch_details_fragment"
-        android:name="jp.sadashi.sample.apollo.client.ui.view.LaunchDetailsFragment"
+        android:name="jp.sadashi.sample.apollo.client.ui.detail.LaunchDetailsFragment"
         tools:layout="@layout/launch_details_fragment">
         <argument
             android:name="launchId"

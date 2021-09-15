@@ -1,4 +1,4 @@
-package jp.sadashi.sample.apollo.client.ui.view
+package jp.sadashi.sample.apollo.client.ui.list
 
 import android.annotation.SuppressLint
 import android.os.Bundle
