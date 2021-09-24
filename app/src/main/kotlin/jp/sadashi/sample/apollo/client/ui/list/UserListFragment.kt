@@ -11,14 +11,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.apollographql.apollo.api.Input
-import com.apollographql.apollo.coroutines.await
 import com.apollographql.apollo.exception.ApolloException
+import dagger.hilt.android.AndroidEntryPoint
 import jp.sadashi.sample.apollo.client.databinding.LaunchListFragmentBinding
-import jp.sadashi.sample.apollo.client.infra.graphql.ApiClient
 import jp.sadashi.sample.apollo.client.infra.graphql.LaunchListQuery
 import kotlinx.coroutines.channels.Channel
 
-class LaunchListFragment : Fragment() {
+@AndroidEntryPoint
+class UserListFragment : Fragment() {
     private lateinit var binding: LaunchListFragmentBinding
 
     override fun onCreateView(
@@ -35,7 +35,7 @@ class LaunchListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val launches = mutableListOf<LaunchListQuery.Launch>()
-        val adapter = LaunchListAdapter(launches)
+        val adapter = UserListAdapter(launches)
         binding.launches.layoutManager = LinearLayoutManager(requireContext())
         binding.launches.adapter = adapter
 

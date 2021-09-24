@@ -7,16 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import coil.load
+import dagger.hilt.android.AndroidEntryPoint
 import jp.sadashi.sample.apollo.client.R
 import jp.sadashi.sample.apollo.client.databinding.LaunchDetailsFragmentBinding
 
-class LaunchDetailsFragment : Fragment() {
+@AndroidEntryPoint
+class UserDetailsFragment : Fragment() {
 
     private lateinit var binding: LaunchDetailsFragmentBinding
     private val args: LaunchDetailsFragmentArgs by navArgs()
 
-    private val viewModel: LaunchDetailsViewModel by viewModels()
+    private val viewModel: UserDetailsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +31,7 @@ class LaunchDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.data.observe(viewLifecycleOwner) { data ->
+        viewModel.user.observe(viewLifecycleOwner) { data ->
             binding.bookButton.visibility = View.GONE
             binding.bookProgressBar.visibility = View.GONE
             binding.progressBar.visibility = View.VISIBLE
@@ -49,6 +50,6 @@ class LaunchDetailsFragment : Fragment() {
             binding.rocketName.text = "🚀 ${rocket?.name} ${rocket?.type}"
         }
 
-        viewModel.query(id = args.launchId)
+        viewModel.get(name = args.name)
     }
 }

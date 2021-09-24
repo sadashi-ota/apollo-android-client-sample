@@ -4,11 +4,12 @@ object Deps {
         const val minSdk = 26
         const val targetSdk = 30
         const val buildTools = "30.0.2"
-        const val kotlin = "1.5.30"
+        const val kotlin = "1.5.31"
         const val coroutines = "1.5.2"
         const val lifecycle = "2.3.1"
         const val navigation = "2.3.5"
         const val apollo = "2.5.9"
+        const val daggerHilt = "2.38.1"
         const val spek = "2.0.17"
     }
 
@@ -18,21 +19,24 @@ object Deps {
         const val navigation = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}"
         const val versionsPlugin = "com.github.ben-manes:gradle-versions-plugin:0.39.0"
         const val androidJunit5 = "de.mannodermaus.gradle.plugins:android-junit5:1.7.1.1"
+        const val daggerHilt = "com.google.dagger:hilt-android-gradle-plugin:${Versions.daggerHilt}"
     }
 
     object Plugin {
         const val application = "com.android.application"
+        const val library = "com.android.library"
         const val kotlin = "kotlin-android"
         const val kapt = "kotlin-kapt"
         const val navigation = "androidx.navigation.safeargs.kotlin"
         const val versions = "com.github.ben-manes.versions"
         const val apollo = "com.apollographql.apollo"
+        const val daggerHilt = "dagger.hilt.android.plugin"
         const val androidJunit5 = "de.mannodermaus.android-junit5"
     }
 
     object Lib {
         object Kotlin {
-            const val stdLibJdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
+            const val stdLib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
             const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
 
             object Coroutines {
@@ -59,6 +63,7 @@ object Deps {
             object Navigation {
                 const val fragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
                 const val ui = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
+                const val hilt = "androidx.hilt:hilt-navigation-fragment:1.0.0"
             }
         }
 
@@ -71,6 +76,11 @@ object Deps {
             const val coroutines = "com.apollographql.apollo:apollo-coroutines-support:${Versions.apollo}"
             const val android = "com.apollographql.apollo:apollo-android-support:${Versions.apollo}"
             const val api = "com.apollographql.apollo:apollo-api:${Versions.apollo}"
+        }
+
+        object DaggerHilt {
+            const val core = "com.google.dagger:hilt-android:${Versions.daggerHilt}"
+            const val compiler = "com.google.dagger:hilt-android-compiler:${Versions.daggerHilt}"
         }
 
         object Spek {

@@ -1,0 +1,10 @@
+query UserDetail($name: String!) {
+  user(login: $name) {
+    login
+    name
+    avatarUrl
+    websiteUrl
+    twitterUsername
+    url
+  }
+}

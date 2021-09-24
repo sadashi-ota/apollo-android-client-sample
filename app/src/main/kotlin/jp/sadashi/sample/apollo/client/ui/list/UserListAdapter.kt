@@ -8,8 +8,8 @@ import jp.sadashi.sample.apollo.client.R
 import jp.sadashi.sample.apollo.client.databinding.LaunchItemBinding
 import jp.sadashi.sample.apollo.client.infra.graphql.LaunchListQuery
 
-class LaunchListAdapter(private val launches: List<LaunchListQuery.Launch>) :
-    RecyclerView.Adapter<LaunchListAdapter.ViewHolder>() {
+class UserListAdapter(private val launches: List<LaunchListQuery.Launch>) :
+    RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: LaunchItemBinding) : RecyclerView.ViewHolder(binding.root)
 
