@@ -5,6 +5,8 @@
       <map>
         <entry key="app/src/main/res/drawable/ic_placeholder.xml" value="0.14166666666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.12537993920972645" />
+        <entry key="app/src/main/res/layout/fragment_user_details.xml" value="0.11875" />
+        <entry key="app/src/main/res/layout/item_user.xml" value="0.1" />
         <entry key="app/src/main/res/layout/launch_details_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/launch_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/launch_list_fragment.xml" value="0.1" />

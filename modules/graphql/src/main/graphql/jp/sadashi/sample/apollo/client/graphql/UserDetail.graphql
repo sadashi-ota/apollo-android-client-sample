@@ -1,5 +1,5 @@
-query UserDetail($name: String!) {
-  user(login: $name) {
+query UserDetail($login: String!) {
+  user(login: $login) {
     login
     name
     avatarUrl

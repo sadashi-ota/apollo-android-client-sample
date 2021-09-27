@@ -17,7 +17,7 @@ class UserRepositoryImpl @Inject constructor(
             .await()
     }
 
-    override suspend fun get(name: String): Response<UserDetailQuery.Data> {
-        return apiClient.query(UserDetailQuery(name = name)).await()
+    override suspend fun get(login: String): Response<UserDetailQuery.Data> {
+        return apiClient.query(UserDetailQuery(login = login)).await()
     }
 }

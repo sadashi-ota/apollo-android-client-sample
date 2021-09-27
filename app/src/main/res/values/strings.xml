@@ -11,4 +11,36 @@
     <string name="tripBooked">%1$d trip(s) has(have) been booked 🚀🚀</string>
     <string name="tripCancelled">A trip has been cancelled</string>
     <string name="subscriptionError">Oops, something wrong happened</string>
+
+    <string name="title_create_repo">リポジトリ作成</string>
+
+    <string name="text_repo_num">リポジトリ数</string>
+    <string name="text_gist_num">Gist数</string>
+    <string name="text_follower_num">フォロワー数</string>
+    <string name="text_follow_num">フォロー数</string>
+    <string name="text_create">作成</string>
+    <string name="text_private">非公開</string>
+    <string name="text_auto_init">空のREADMEを作成する</string>
+
+    <string name="hint_repository_name">リポジトリ名</string>
+    <string name="hint_description">説明</string>
+
+    <string name="text_my_page">マイページ</string>
+    <string name="text_create_repo">リポジトリを作成</string>
+    <string name="text_open_in_browser">ブラウザで開く</string>
+    <string name="text_send_email">メールを送る</string>
+    <string name="text_logout">ログアウト</string>
+
+    <string name="btn_search">search</string>
+    <string name="btn_retry">retry</string>
+
+    <string name="description_avatar">avatar</string>
+
+    <string name="msg_hint_search">Please input user name.</string>
+    <string name="msg_failed_to_search">Failed to search. Try again....</string>
+    <string name="msg_load_error">Failed to load data. Please reload.</string>
+
+    <string name="msg_succeed_to_create">Succeed to create repository.</string>
+    <string name="msg_failed_to_create">Failed to create repository. Try again....</string>
+
 </resources>

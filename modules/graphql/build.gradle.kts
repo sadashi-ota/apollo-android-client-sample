@@ -44,6 +44,10 @@ android {
 
 apollo {
     generateKotlinModels.set(true)
+    customTypeMapping.set(mapOf(
+        "URI" to "String",
+        "Date" to "java.util.Date"
+    ))
 }
 
 dependencies {

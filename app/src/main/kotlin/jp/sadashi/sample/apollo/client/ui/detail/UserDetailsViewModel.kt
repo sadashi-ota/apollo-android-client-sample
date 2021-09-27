@@ -15,12 +15,12 @@ class UserDetailsViewModel @Inject constructor(
     private val userRepository: UserRepository
 ) : ViewModel() {
 
-    val user = MutableLiveData<UserDetailQuery.Data>()
+    val user = MutableLiveData<UserDetailQuery.User>()
 
-    fun get(name: String) {
+    fun get(login: String) {
         viewModelScope.launch {
-            val response = userRepository.get(name)
-            response.data?.let { user.value = it }
+            val response = userRepository.get(login)
+            response.data?.user?.let { user.value = it }
         }
     }
 }

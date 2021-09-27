@@ -5,40 +5,46 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import jp.sadashi.sample.apollo.client.R
-import jp.sadashi.sample.apollo.client.databinding.LaunchItemBinding
-import jp.sadashi.sample.apollo.client.infra.graphql.LaunchListQuery
+import jp.sadashi.sample.apollo.client.databinding.ItemUserBinding
+import jp.sadashi.sample.apollo.client.graphql.SearchUserQuery.Node
+import jp.sadashi.sample.apollo.client.graphql.SearchUserQuery.AsUser as User
 
-class UserListAdapter(private val launches: List<LaunchListQuery.Launch>) :
+class UserListAdapter(private val nodes: List<Node?>) :
     RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
 
-    class ViewHolder(val binding: LaunchItemBinding) : RecyclerView.ViewHolder(binding.root)
+    var onEndOfListReached: (() -> Unit)? = null
+    var onItemClicked: ((User) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = LaunchItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemUserBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
         return ViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
-        return launches.size
+        return nodes.size
     }
 
-    var onEndOfListReached: (() -> Unit)? = null
-    var onItemClicked: ((LaunchListQuery.Launch) -> Unit)? = null
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val launch = launches[position]
-        holder.binding.site.text = launch.site ?: ""
-        holder.binding.missionName.text = launch.mission?.name
-        holder.binding.missionPatch.load(launch.mission?.missionPatch) {
-            placeholder(R.drawable.ic_placeholder)
-        }
+        val user = nodes[position]?.asUser ?: return
+        holder.bind(user)
 
-        if (position == launches.size - 1) {
+        if (position == nodes.size - 1) {
             onEndOfListReached?.invoke()
         }
+    }
 
-        holder.binding.root.setOnClickListener {
-            onItemClicked?.invoke(launch)
+    inner class ViewHolder(private val binding: ItemUserBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(user: User) {
+            binding.icon.load(user.avatarUrl) {
+                placeholder(R.drawable.ic_placeholder)
+            }
+            binding.name.text = user.name
+            binding.itemLayout.setOnClickListener {
+                onItemClicked?.invoke(user)
+            }
         }
     }
 }

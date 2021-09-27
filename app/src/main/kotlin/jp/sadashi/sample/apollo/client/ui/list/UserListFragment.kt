@@ -9,24 +9,27 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.apollographql.apollo.api.Input
 import com.apollographql.apollo.exception.ApolloException
 import dagger.hilt.android.AndroidEntryPoint
-import jp.sadashi.sample.apollo.client.databinding.LaunchListFragmentBinding
-import jp.sadashi.sample.apollo.client.infra.graphql.LaunchListQuery
+import jp.sadashi.sample.apollo.client.databinding.FragmentUserListBinding
+import jp.sadashi.sample.apollo.client.domain.UserRepository
+import jp.sadashi.sample.apollo.client.graphql.SearchUserQuery
 import kotlinx.coroutines.channels.Channel
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class UserListFragment : Fragment() {
-    private lateinit var binding: LaunchListFragmentBinding
+    private lateinit var binding: FragmentUserListBinding
+
+    @Inject
+    internal lateinit var repository: UserRepository
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = LaunchListFragmentBinding.inflate(inflater)
+        binding = FragmentUserListBinding.inflate(inflater)
         return binding.root
     }
 
@@ -34,10 +37,9 @@ class UserListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val launches = mutableListOf<LaunchListQuery.Launch>()
-        val adapter = UserListAdapter(launches)
-        binding.launches.layoutManager = LinearLayoutManager(requireContext())
-        binding.launches.adapter = adapter
+        val nodes = mutableListOf<SearchUserQuery.Node?>()
+        val adapter = UserListAdapter(nodes)
+        binding.userListView.adapter = adapter
 
         val channel = Channel<Unit>(Channel.CONFLATED)
 
@@ -48,25 +50,22 @@ class UserListFragment : Fragment() {
         }
 
         lifecycleScope.launchWhenResumed {
-            var cursor: String? = null
             for (item in channel) {
                 val response = try {
-                    ApiClient.apolloClient.query(LaunchListQuery(cursor = Input.fromNullable(cursor)))
-                        .await()
+                    repository.query(query = "sadashi", cursor = null)
                 } catch (e: ApolloException) {
                     Log.d("LaunchList", "Failure", e)
                     return@launchWhenResumed
                 }
 
-                val newLaunches = response.data?.launches?.launches?.filterNotNull()
+                val search = response.data?.search ?: break
 
-                if (newLaunches != null) {
-                    launches.addAll(newLaunches)
+                search.nodes?.let { it ->
+                    nodes.addAll(it)
                     adapter.notifyDataSetChanged()
                 }
 
-                cursor = response.data?.launches?.cursor
-                if (response.data?.launches?.hasMore != true) {
+                if (!search.pageInfo.hasNextPage) {
                     break
                 }
             }
@@ -75,9 +74,9 @@ class UserListFragment : Fragment() {
             channel.close()
         }
 
-        adapter.onItemClicked = { launch ->
+        adapter.onItemClicked = { user ->
             findNavController().navigate(
-                LaunchListFragmentDirections.openLaunchDetails(launchId = launch.id)
+                UserListFragmentDirections.openUserDetail(login = user.login)
             )
         }
     }

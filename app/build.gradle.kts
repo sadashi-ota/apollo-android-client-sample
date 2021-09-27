@@ -77,8 +77,6 @@ kapt {
 }
 
 dependencies {
-    implementation(project(":graphql"))
-
     implementation(Deps.Lib.Kotlin.stdLib)
     implementation(Deps.Lib.Kotlin.Coroutines.core)
     implementation(Deps.Lib.Kotlin.Coroutines.android)
@@ -116,4 +114,6 @@ dependencies {
     testImplementation(Deps.Lib.Spek.runner)
 
     testImplementation(Deps.Lib.mockk)
+
+    implementation(project(mapOf("path" to ":graphql")))
 }

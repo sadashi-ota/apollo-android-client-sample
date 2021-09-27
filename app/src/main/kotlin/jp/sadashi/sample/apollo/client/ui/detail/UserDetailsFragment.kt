@@ -7,15 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import coil.load
 import dagger.hilt.android.AndroidEntryPoint
 import jp.sadashi.sample.apollo.client.R
-import jp.sadashi.sample.apollo.client.databinding.LaunchDetailsFragmentBinding
+import jp.sadashi.sample.apollo.client.databinding.FragmentUserDetailsBinding
 
 @AndroidEntryPoint
 class UserDetailsFragment : Fragment() {
 
-    private lateinit var binding: LaunchDetailsFragmentBinding
-    private val args: LaunchDetailsFragmentArgs by navArgs()
+    private lateinit var binding: FragmentUserDetailsBinding
+    private val args: UserDetailsFragmentArgs by navArgs()
 
     private val viewModel: UserDetailsViewModel by viewModels()
 
@@ -24,32 +25,20 @@ class UserDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = LaunchDetailsFragmentBinding.inflate(inflater)
+        binding = FragmentUserDetailsBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.user.observe(viewLifecycleOwner) { data ->
-            binding.bookButton.visibility = View.GONE
-            binding.bookProgressBar.visibility = View.GONE
-            binding.progressBar.visibility = View.VISIBLE
-            binding.error.visibility = View.GONE
-
-            val launch = data.launch ?: return@observe
-
-            binding.progressBar.visibility = View.GONE
-
-            binding.missionPatch.load(launch.mission?.missionPatch) {
+        viewModel.user.observe(viewLifecycleOwner) { user ->
+            binding.userIcon.load(user.avatarUrl) {
                 placeholder(R.drawable.ic_placeholder)
             }
-            binding.site.text = launch.site
-            binding.missionName.text = launch.mission?.name
-            val rocket = launch.rocket
-            binding.rocketName.text = "🚀 ${rocket?.name} ${rocket?.type}"
+            binding.userName.text = user.name
         }
 
-        viewModel.get(name = args.name)
+        viewModel.get(login = args.login)
     }
 }
