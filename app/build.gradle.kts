@@ -4,7 +4,7 @@ plugins {
     id(Deps.Plugin.kapt)
     id(Deps.Plugin.navigation)
     id(Deps.Plugin.versions)
-    id(Deps.Plugin.apollo).version(Deps.Versions.apollo)
+    id(Deps.Plugin.daggerHilt)
     id(Deps.Plugin.androidJunit5)
 }
 
@@ -72,12 +72,12 @@ android {
     }
 }
 
-apollo {
-    generateKotlinModels.set(true)
+kapt {
+    correctErrorTypes = true
 }
 
 dependencies {
-    implementation(Deps.Lib.Kotlin.stdLibJdk8)
+    implementation(Deps.Lib.Kotlin.stdLib)
     implementation(Deps.Lib.Kotlin.Coroutines.core)
     implementation(Deps.Lib.Kotlin.Coroutines.android)
 
@@ -96,8 +96,10 @@ dependencies {
 
     implementation(Deps.Lib.AndroidX.Navigation.fragment)
     implementation(Deps.Lib.AndroidX.Navigation.ui)
+    implementation(Deps.Lib.AndroidX.Navigation.hilt)
 
     implementation(Deps.Lib.coil)
+    implementation(Deps.Lib.logcat)
 
     implementation(Deps.Lib.Apollo.runtime)
     implementation(Deps.Lib.Apollo.cache)
@@ -105,9 +107,14 @@ dependencies {
     implementation(Deps.Lib.Apollo.android)
     implementation(Deps.Lib.Apollo.api)
 
+    implementation(Deps.Lib.DaggerHilt.core)
+    kapt(Deps.Lib.DaggerHilt.compiler)
+
     testImplementation(Deps.Lib.Kotlin.reflect)
     testImplementation(Deps.Lib.Spek.dsl)
     testImplementation(Deps.Lib.Spek.runner)
 
     testImplementation(Deps.Lib.mockk)
+
+    implementation(project(mapOf("path" to ":graphql")))
 }

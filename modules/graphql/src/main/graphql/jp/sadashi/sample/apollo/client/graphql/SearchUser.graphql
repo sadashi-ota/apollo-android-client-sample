@@ -1,0 +1,21 @@
+query SearchUser($query: String!, $cursor: String) {
+  search(query: $query, type: USER, first: 10, after: $cursor) {
+    userCount
+    nodes {
+      ... on User {
+        login
+        name
+        avatarUrl
+        websiteUrl
+        twitterUsername
+        url
+      }
+    }
+    pageInfo {
+      startCursor
+      hasNextPage
+      hasPreviousPage
+      endCursor
+    }
+  }
+}
