@@ -35,7 +35,8 @@
                     android:layout_weight="1"
                     android:hint="@string/msg_hint_search"
                     android:inputType="text"
-                    android:lines="1"/>
+                    android:lines="1"
+                    android:autofillHints="name" />
 
                 <com.google.android.material.button.MaterialButton
                     style="@style/Widget.MaterialComponents.Button"

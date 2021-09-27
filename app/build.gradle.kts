@@ -99,6 +99,7 @@ dependencies {
     implementation(Deps.Lib.AndroidX.Navigation.hilt)
 
     implementation(Deps.Lib.coil)
+    implementation(Deps.Lib.logcat)
 
     implementation(Deps.Lib.Apollo.runtime)
     implementation(Deps.Lib.Apollo.cache)

@@ -69,6 +69,7 @@ object Deps {
 
         const val material = "com.google.android.material:material:1.4.0"
         const val coil = "io.coil-kt:coil:1.3.2"
+        const val logcat = "com.squareup.logcat:logcat:0.1"
 
         object Apollo {
             const val runtime = "com.apollographql.apollo:apollo-runtime:${Versions.apollo}"
